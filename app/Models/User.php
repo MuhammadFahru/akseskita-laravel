@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Crypt;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -46,5 +47,31 @@ class User extends Authenticatable
     public function services()
     {
         return $this->belongsToMany(Service::class, 'user_services', 'user_id', 'service_id');
+    }
+
+    public static function generateUserToken(User $user): array
+    {
+        $token = $user->createToken('AuthToken')->plainTextToken;
+
+        $user_info = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'birthdate' => $user->birthdate,
+            'gender' => $user->gender,
+            'disability_type' => $user->disability_type,
+            'foto_profile' => $user->foto_profile,
+            'encrypt_id' => Crypt::encrypt($user->id),
+            'access_token' => $token,
+        ];
+
+        $response_data = [
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'expires_in' => config('sanctum.expiration') * 60,
+            'user_info' => $user_info,
+        ];
+
+        return $response_data;
     }
 }
