@@ -16,4 +16,9 @@ class Facility extends Model
     {
         return $this->hasMany(FacilityImage::class, 'facility_id', 'id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(FacilityReview::class, 'facility_id', 'id');
+    }
 }

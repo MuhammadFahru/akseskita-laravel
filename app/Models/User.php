@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Service::class, 'user_services', 'user_id', 'service_id');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(FacilityReview::class, 'user_id', 'id');
+    }
+
     public static function generateUserToken(User $user): array
     {
         $token = $user->createToken('AuthToken')->plainTextToken;
