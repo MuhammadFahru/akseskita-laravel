@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description');
             $table->string('category');
             $table->string('address');
-            $table->float('rating');
             $table->boolean('is_favorite');
             $table->string('latitude');
             $table->string('longitude');
