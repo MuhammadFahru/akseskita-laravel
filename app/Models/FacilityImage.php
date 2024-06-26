@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Facility extends Model
+class FacilityImage extends Model
 {
     use HasFactory;
 
-    protected $table = 'facilities';
+    protected $table = 'facility_images';
     protected $guarded = ['id'];
 
-    public function images()
+    public function facility()
     {
-        return $this->hasMany(FacilityImage::class, 'facility_id', 'id');
+        return $this->belongsTo(Facility::class, 'facility_id', 'id');
     }
 }
