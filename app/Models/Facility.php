@@ -21,4 +21,9 @@ class Facility extends Model
     {
         return $this->hasMany(FacilityReview::class, 'facility_id', 'id');
     }
+
+    public function getRatingAttribute()
+    {
+        return $this->reviews()->avg('rating');
+    }
 }

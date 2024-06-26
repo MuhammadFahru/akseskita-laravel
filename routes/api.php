@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\FacilityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::middleware(['auth:sanctum', 'cors'])->group(function () {
         Route::get('user-info', 'getUserInfo')->name('getUserInfo');
     });
+});
+
+Route::controller(FacilityController::class)->group(function () {
+    Route::post('facilities', 'getAllFacilities')->name('facilities');
+    Route::post('facilities/{id}', 'getDetailFacility')->name('facilities.detail');
 });
