@@ -20,10 +20,10 @@ return new class extends Migration
             $table->boolean('is_favorite');
             $table->string('latitude');
             $table->string('longitude');
-            $table->string('tuna_netra_friendly_status')->nullable();
-            $table->string('tuna_rungu_friendly_status')->nullable();
-            $table->string('tuna_daksa_friendly_status')->nullable();
-            $table->string('tuna_wicara_friendly_status')->nullable();
+            $table->integer('tuna_netra_friendly_status')->nullable();
+            $table->integer('tuna_rungu_friendly_status')->nullable();
+            $table->integer('tuna_daksa_friendly_status')->nullable();
+            $table->integer('tuna_wicara_friendly_status')->nullable();
             $table->timestamps();
         });
     }
